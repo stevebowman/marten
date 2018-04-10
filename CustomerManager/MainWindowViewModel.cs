@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿using GalaSoft.MvvmLight.Command;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using GalaSoft.MvvmLight.Command;
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace CustomerManager
 {
@@ -59,21 +60,38 @@ namespace CustomerManager
 
         private void InsertData()
         {
-           // TODO
+            using (var session = App.Store.LightweightSession())
+            {
+                session.Store(Customer);
+
+                session.SaveChanges();
+            }
         }
         private void LoadData()
         {
-            // TODO
+            using (var session = App.Store.QuerySession())
+            {
+                Customer = session.Load<Customer>(IdToLoad);
+            }
         }
 
         private void UpdateData()
         {
-            // TODO
+            using (var session = App.Store.LightweightSession())
+            {
+                session.Store(Customer);
+
+                session.SaveChanges();
+            }
         }
 
         private void DeleteData()
         {
-            // TODO
+            using (var session = App.Store.LightweightSession())
+            {
+                session.Delete(Customer);
+                session.SaveChanges();
+            }
 
             ClearData();
         }
