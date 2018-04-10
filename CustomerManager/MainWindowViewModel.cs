@@ -62,6 +62,12 @@ namespace CustomerManager
         {
             using (var session = App.Store.LightweightSession())
             {
+                var accountManager = new AccountManager {Name = "Bob"};
+
+                session.Store(accountManager);
+
+                Customer.AccountManagerId = accountManager.Id;
+
                 session.Store(Customer);
 
                 session.SaveChanges();

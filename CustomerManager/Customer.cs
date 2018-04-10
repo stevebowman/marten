@@ -19,6 +19,9 @@ namespace CustomerManager
             }
         }
 
+
+        public int AccountManagerId { get; set; }
+
         public string FirstName
         {
             get { return _firstName; }
